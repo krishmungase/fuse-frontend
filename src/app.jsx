@@ -15,7 +15,7 @@ function App() {
       <div className="relative flex min-h-screen flex-col bg-background text-foreground">
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+            <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
               <QueryClientProvider client={queryClient}>
                 <AppRoutes />
                 <Toaster position="bottom-right" closeButton={true} />
