@@ -169,3 +169,39 @@
     width: 0%;
   }
 }
+
+/* -------------------------------------------------------------------------
+ * Chat surface palette
+ * The chat shell is a fixed dark surface (it does not follow light/dark),
+ * so its colours live in their own token namespace instead of overriding
+ * the app-wide shadcn tokens used by the auth pages.
+ * ---------------------------------------------------------------------- */
+@theme {
+  --color-chat-background: #0b0b0b;
+  --color-chat-sidebar: #202020;
+  --color-chat-surface: #1f1f1f;
+  --color-chat-elevated: #282828;
+  --color-chat-foreground: #e8e8e8;
+  --color-chat-secondary: #a0a0a0;
+  --color-chat-muted: #777777;
+  --color-chat-border: rgba(255, 255, 255, 0.06);
+  --color-chat-hover: rgba(255, 255, 255, 0.06);
+  --color-chat-active: rgba(255, 255, 255, 0.08);
+  --color-chat-brand: #8ab4f8;
+  --color-chat-status: #4285f4;
+}
+
+/* Extremely subtle blue/purple radial bloom behind the chat empty state. */
+.chat-glow {
+  background:
+    radial-gradient(
+      58% 42% at 50% 60%,
+      rgba(96, 116, 255, 0.09) 0%,
+      transparent 72%
+    ),
+    radial-gradient(
+      34% 26% at 61% 72%,
+      rgba(150, 104, 236, 0.06) 0%,
+      transparent 74%
+    );
+}

@@ -1,50 +1,46 @@
 import { useNavigate } from 'react-router'
-import { Home, Search, ArrowLeft } from 'lucide-react'
+import { ArrowLeft, House } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
+import { usePageTitle } from '@/hooks'
+import { pageTitle } from '@/constants'
 
 const NotFoundPage = () => {
   const navigate = useNavigate()
 
+  usePageTitle({ title: pageTitle.NOT_FOUND_PAGE })
+
   return (
-    <div className="flex items-center h-full justify-center p-4">
-      <div className="text-center space-y-6">
-        <div className="relative">
-          <h1 className="text-9xl md:text-[12rem] font-bold text-primary">
-            404
-          </h1>
-        </div>
+    <div className="flex h-screen flex-col items-center justify-center bg-chat-background px-6 text-center tracking-normal">
+      <p className="text-[88px] leading-none font-light tracking-tight text-chat-muted sm:text-[120px]">
+        404
+      </p>
 
-        <div className="space-y-3">
-          <h2 className="text-2xl md:text-4xl font-bold">
-            Oops! Page Not Found
-          </h2>
-          <p className="text-muted-foreground max-w-md mx-auto">
-            The page you're looking for seems to have wandered off into the
-            digital void. Let's get you back on track!
-          </p>
-        </div>
+      <h1 className="mt-6 text-[26px] leading-tight font-light tracking-tight text-chat-foreground sm:text-[34px]">
+        Page not found
+      </h1>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-6">
-          <Button
-            size="lg"
-            onClick={() => navigate('/')}
-            className="w-full sm:w-fit"
-          >
-            <Home className="mr-2 h-5 w-5" />
-            Back to Home
-          </Button>
+      <p className="mt-3 max-w-md text-[14px] text-chat-secondary">
+        The page you're looking for doesn't exist or has been moved.
+      </p>
 
-          <Button
-            size="lg"
-            variant="outline"
-            className="w-full sm:w-fit"
-            onClick={() => navigate(-1)}
-          >
-            <ArrowLeft className="mr-2 h-5 w-5" />
-            Go Back
-          </Button>
-        </div>
+      <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
+        <button
+          type="button"
+          onClick={() => navigate('/')}
+          className="flex h-10 cursor-pointer items-center gap-2 rounded-full bg-chat-active px-5 text-[14px] text-chat-foreground transition-colors duration-150 outline-none hover:bg-chat-hover"
+        >
+          <House className="size-4" />
+          Back to chat
+        </button>
+
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="flex h-10 cursor-pointer items-center gap-2 rounded-full border border-chat-border px-5 text-[14px] text-chat-secondary transition-colors duration-150 outline-none hover:bg-chat-hover hover:text-chat-foreground"
+        >
+          <ArrowLeft className="size-4" />
+          Go back
+        </button>
       </div>
     </div>
   )

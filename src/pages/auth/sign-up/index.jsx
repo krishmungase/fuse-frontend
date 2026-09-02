@@ -2,21 +2,28 @@ import { usePageTitle } from '@/hooks'
 import { pageTitle } from '@/constants'
 
 import SignUpForm from './components/signup-form'
-import RegisterIllustration from './components/register-illustration'
+import AuthSplit from '../components/auth-split'
+import AuthHeader from '../components/auth-header'
+import AuthSwitchLink from '../components/auth-switch-link'
 
 const SignUpPage = () => {
   usePageTitle({ title: pageTitle.SIGN_UP_PAGE })
 
   return (
-    <div className="h-full flex">
-      <RegisterIllustration />
-
-      <div className="hidden lg:flex items-center">
-        <div className="h-[80%] w-px bg-zinc-200 dark:bg-zinc-800" />
-      </div>
+    <AuthSplit illustration="/register.png">
+      <AuthHeader
+        title="Create your account"
+        subtitle="Get started with Fuse AI in seconds"
+      />
 
       <SignUpForm />
-    </div>
+
+      <AuthSwitchLink
+        prompt="Already have an account?"
+        to="/auth/sign-in"
+        label="Sign in"
+      />
+    </AuthSplit>
   )
 }
 
