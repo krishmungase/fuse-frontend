@@ -3,27 +3,32 @@ import { BrowserRouter, Navigate, Routes, Route } from 'react-router'
 import { AuthLayout, ChatLayout } from './pages'
 import {
   ChatPage,
+  CheckEmailPage,
+  CreatePasswordPage,
   NewChatPage,
   NotFoundPage,
   SignInPage,
   SignUpPage,
+  VerifyEmailPage,
 } from './pages'
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route index element={<Navigate to="/chat" replace />} />
+
         <Route element={<ChatLayout />}>
-          <Route index element={<NewChatPage />} />
           <Route path="chat" element={<NewChatPage />} />
           <Route path="chat/:id" element={<ChatPage />} />
         </Route>
 
-        <Route path="chat" element={<Navigate to="/" replace />} />
-
         <Route path="auth" element={<AuthLayout />}>
           <Route path="sign-in" element={<SignInPage />} />
           <Route path="sign-up" element={<SignUpPage />} />
+          <Route path="check-email" element={<CheckEmailPage />} />
+          <Route path="verify-email" element={<VerifyEmailPage />} />
+          <Route path="create-password" element={<CreatePasswordPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />

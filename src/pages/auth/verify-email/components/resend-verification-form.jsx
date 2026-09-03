@@ -1,47 +1,30 @@
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { useRegister } from '@/apis'
 import { Form } from '@/components/ui/form'
+import { useResendVerification } from '@/apis'
 
 import AuthField from '../../components/auth-field'
 import AuthSubmitButton from '../../components/auth-submit-button'
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: 'Name is required' }),
   email: z
     .string()
     .min(1, { message: 'Email is required' })
     .email({ message: 'Invalid email address' }),
 })
 
-/**
- * Collects only a name and email. The account stays pending until the emailed
- * link is opened, so a successful submit moves on to the check-email page
- * rather than signing anyone in.
- */
-const SignUpForm = () => {
-  const navigate = useNavigate()
-
-  const { isLoading, register } = useRegister({
-    onSuccess: (data, submitted) =>
-      navigate('/auth/check-email', {
-        replace: true,
-        state: { email: data?.email ?? submitted.email },
-      }),
-  })
+/** Asks for the address again and requests a fresh verification link. */
+const ResendVerificationForm = ({ defaultEmail = '' }) => {
+  const { isLoading, resendVerification } = useResendVerification()
 
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-    },
+    defaultValues: { email: defaultEmail },
   })
 
-  const onSubmit = (data) => register({ data })
+  const onSubmit = (data) => resendVerification({ data })
 
   return (
     <Form {...form}>
@@ -49,14 +32,6 @@ const SignUpForm = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex w-full flex-col gap-4"
       >
-        <AuthField
-          control={form.control}
-          name="name"
-          label="Name"
-          placeholder="John Doe"
-          autoComplete="name"
-        />
-
         <AuthField
           control={form.control}
           name="email"
@@ -67,11 +42,11 @@ const SignUpForm = () => {
         />
 
         <AuthSubmitButton isLoading={isLoading}>
-          Create account
+          Send a new link
         </AuthSubmitButton>
       </form>
     </Form>
   )
 }
 
-export default SignUpForm
+export default ResendVerificationForm
