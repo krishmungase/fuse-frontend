@@ -5,12 +5,6 @@ import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks'
 import ChatSidebar from './components/chat-sidebar'
 
-const SIDEBAR_USER = {
-  name: 'Krishna Mungase',
-  plan: 'Pro',
-  avatarUrl: '',
-}
-
 const DESKTOP_QUERY = '(min-width: 1024px)'
 
 const ChatLayout = () => {
@@ -48,7 +42,6 @@ const ChatLayout = () => {
       >
         <div className="h-full w-[272px]">
           <ChatSidebar
-            user={SIDEBAR_USER}
             onCollapse={handleCollapse}
             onNavigate={() => setDrawerOpen(false)}
           />
