@@ -1,25 +1,18 @@
-import { useDispatch } from 'react-redux'
 import { useMutation } from '@tanstack/react-query'
-
-import { setAuth } from '@/store'
-import { successToast } from '@/lib'
 
 import apis from './apis'
 
-const useRegister = () => {
-  const dispatch = useDispatch()
-
+/**
+ * Registration no longer signs the user in: the account stays pending until
+ * the emailed link is opened and a password is set. onSuccess receives the
+ * API payload plus the submitted values, so the caller can carry the address
+ * through to the check-email page.
+ */
+const useRegister = ({ onSuccess } = {}) => {
   const { isPending, mutate } = useMutation({
     mutationFn: ({ data }) => apis.register({ data }),
-    onSuccess: () => {
-      successToast({ message: 'User registered successfully' })
-      dispatch(
-        setAuth({
-          user: response?.data?.user,
-          token: response?.data?.token,
-        })
-      )
-    },
+    onSuccess: ({ data: response }, variables) =>
+      onSuccess?.(response?.data, variables.data),
     retry: false,
   })
 

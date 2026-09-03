@@ -5,9 +5,11 @@ import RecentChats from './recent-chats'
 import SidebarBrand from './sidebar-brand'
 import UserProfile from './user-profile'
 import SidebarNavigation from './sidebar-navigation'
+import { useAuth } from '@/hooks'
 
-const ChatSidebar = ({ user, onCollapse, onNavigate, className }) => {
+const ChatSidebar = ({ onCollapse, onNavigate, className }) => {
   const [activeNavId, setActiveNavId] = useState(null)
+  const { user } = useAuth()
 
   return (
     <div
@@ -30,11 +32,7 @@ const ChatSidebar = ({ user, onCollapse, onNavigate, className }) => {
       </div>
 
       <div className="px-2 pb-2">
-        <UserProfile
-          name={user.name}
-          plan={user.plan}
-          avatarUrl={user.avatarUrl}
-        />
+        <UserProfile name={user.name} />
       </div>
     </div>
   )

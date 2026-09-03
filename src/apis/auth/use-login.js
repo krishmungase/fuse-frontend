@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux'
 import { useMutation } from '@tanstack/react-query'
 
-import { successToast } from '@/lib'
 import { setAuth } from '@/store'
+import { successToast } from '@/lib'
 
 import apis from './apis'
 
-const useLogin = () => {
+const useLogin = ({ onSuccess } = {}) => {
   const dispatch = useDispatch()
 
   const { mutate, isPending } = useMutation({
@@ -16,9 +16,10 @@ const useLogin = () => {
       dispatch(
         setAuth({
           user: response?.data?.user,
-          token: response?.data?.token,
+          token: response?.data?.accessToken,
         })
       )
+      onSuccess?.(response?.data)
     },
     retry: false,
   })

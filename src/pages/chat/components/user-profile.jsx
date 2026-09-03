@@ -1,42 +1,64 @@
+import { useState } from 'react'
 import { SettingsIcon } from 'lucide-animated'
 
-import { cn } from '@/lib/utils'
+import { cn, getInitials } from '@/lib'
 import { IconButton } from '@/components'
+import { Popover, PopoverTrigger } from '@/components/ui/popover'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
-const getInitials = (name = '') =>
-  name
-    .split(' ')
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join('')
-    .toUpperCase()
+import AccountPopover from './account-popover'
 
-/** Pinned account row at the foot of the sidebar. */
-const UserProfile = ({ name, plan, avatarUrl, onOpenSettings, className }) => {
+const UserProfile = ({
+  name,
+  plan,
+  avatarUrl,
+  onOpenSettings,
+  onOpenProfile,
+  className,
+}) => {
+  const [open, setOpen] = useState(false)
+
   return (
     <div
       className={cn(
-        'flex items-center gap-3 rounded-full px-2 py-2 transition-colors duration-150 hover:bg-chat-hover',
+        'flex items-center gap-3 rounded-full py-2 pr-2 transition-colors duration-150 hover:bg-chat-hover',
         className
       )}
     >
-      <Avatar className="size-8 shrink-0">
-        <AvatarImage src={avatarUrl} alt={name} />
-        <AvatarFallback className="bg-chat-elevated text-[12px] font-medium text-chat-foreground">
-          {getInitials(name)}
-        </AvatarFallback>
-      </Avatar>
+      <Popover open={open} onOpenChange={setOpen}>
+        {/* Identity is the trigger; the settings button stays a separate
+            target so the two actions never fight over the same click. */}
+        <PopoverTrigger asChild>
+          <button
+            type="button"
+            aria-label="Open account menu"
+            className="flex min-w-0 flex-1 cursor-pointer items-center gap-3 rounded-full px-2 text-left outline-none"
+          >
+            <Avatar className="size-8 shrink-0">
+              <AvatarImage src={avatarUrl} alt={name} />
+              <AvatarFallback className="bg-chat-elevated text-[12px] font-medium text-chat-foreground">
+                {getInitials(name)}
+              </AvatarFallback>
+            </Avatar>
 
-      <div className="flex min-w-0 flex-1 flex-col">
-        <span className="truncate text-[13px] leading-tight text-chat-foreground">
-          {name}
-        </span>
-        <span className="truncate text-[11px] leading-tight text-chat-muted">
-          {plan}
-        </span>
-      </div>
+            <span className="flex min-w-0 flex-1 flex-col">
+              <span className="truncate text-[13px] leading-tight text-chat-foreground">
+                {name}
+              </span>
+              {plan ? (
+                <span className="truncate text-[11px] leading-tight text-chat-muted">
+                  {plan}
+                </span>
+              ) : null}
+            </span>
+          </button>
+        </PopoverTrigger>
+
+        <AccountPopover
+          onClose={() => setOpen(false)}
+          onOpenProfile={onOpenProfile}
+        />
+      </Popover>
 
       <div className="relative shrink-0">
         <IconButton

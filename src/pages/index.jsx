@@ -3,6 +3,9 @@ import NewChatPage from './chat'
 
 import SignInPage from './auth/sign-in'
 import SignUpPage from './auth/sign-up'
+import CheckEmailPage from './auth/check-email'
+import VerifyEmailPage from './auth/verify-email'
+import CreatePasswordPage from './auth/create-password'
 
 import NotFoundPage from './not-found'
 
@@ -11,7 +14,13 @@ import AuthLayout from './auth/layout'
 
 export { ChatPage, NewChatPage }
 
-export { SignInPage, SignUpPage }
+export {
+  SignInPage,
+  SignUpPage,
+  CheckEmailPage,
+  VerifyEmailPage,
+  CreatePasswordPage,
+}
 
 export { NotFoundPage }
 

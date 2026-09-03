@@ -1,27 +1,22 @@
 import { useState } from 'react'
-import { Outlet } from 'react-router'
+import { Navigate, Outlet } from 'react-router'
 
 import { cn } from '@/lib/utils'
+import { useAuth } from '@/hooks'
 import ChatSidebar from './components/chat-sidebar'
-
-const SIDEBAR_USER = {
-  name: 'Krishna Mungase',
-  plan: 'Pro',
-  avatarUrl: '',
-}
 
 const DESKTOP_QUERY = '(min-width: 1024px)'
 
-/**
- * Chat shell: fixed dark surface with a pinned sidebar beside the routed
- * canvas. Below `lg` the sidebar slides in as a drawer instead.
- */
 const ChatLayout = () => {
   const [collapsed, setCollapsed] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
-  // The one control in the sidebar header collapses on desktop and closes the
-  // drawer on smaller screens.
+  const { user } = useAuth()
+
+  if (!user) {
+    return <Navigate to="/auth/sign-in" replace />
+  }
+
   const handleCollapse = () => {
     if (window.matchMedia(DESKTOP_QUERY).matches) setCollapsed(true)
     else setDrawerOpen(false)
@@ -47,7 +42,6 @@ const ChatLayout = () => {
       >
         <div className="h-full w-[272px]">
           <ChatSidebar
-            user={SIDEBAR_USER}
             onCollapse={handleCollapse}
             onNavigate={() => setDrawerOpen(false)}
           />
