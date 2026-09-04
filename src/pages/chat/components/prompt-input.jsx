@@ -3,6 +3,9 @@ import { MicIcon, PlusIcon } from 'lucide-animated'
 import { Camera, HardDriveUpload, Paperclip } from 'lucide-react'
 
 import { IconButton } from '@/components'
+import { useChatModel } from '@/hooks'
+
+import ModelSelector from './model-selector'
 
 import {
   DropdownMenu,
@@ -22,13 +25,15 @@ const PromptInput = ({ onSubmit }) => {
   const inputRef = useRef(null)
   const [value, setValue] = useState('')
 
+  const { models, selectedModel, selectModel, isLoading } = useChatModel()
+
   const handleSubmit = (event) => {
     event.preventDefault()
 
     const prompt = value.trim()
     if (!prompt) return
 
-    onSubmit?.({ prompt, model })
+    onSubmit?.({ prompt, model: selectedModel })
     setValue('')
   }
 
@@ -76,7 +81,17 @@ const PromptInput = ({ onSubmit }) => {
         className="h-full min-w-0 flex-1 bg-transparent px-2 text-[16px] text-chat-foreground placeholder:text-chat-secondary focus:outline-none"
       />
 
-      <div className="flex shrink-0 items-center gap-1">
+      <div
+        className="flex shrink-0 items-center gap-1"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <ModelSelector
+          models={models}
+          value={selectedModel}
+          onChange={selectModel}
+          isLoading={isLoading}
+        />
+
         <IconButton
           icon={MicIcon}
           animated

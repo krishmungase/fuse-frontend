@@ -4,7 +4,6 @@ import { Check } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { AnimatedIcon } from '@/components'
-import { CHAT_MODELS } from '@/constants'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,12 +11,24 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-/** Compact model picker that lives on the right of the prompt input. */
-const ModelSelector = ({ value, onChange }) => {
+/**
+ * Compact model picker that lives on the right of the prompt input. The
+ * options come from the backend allowlist, so this component never decides
+ * which models exist.
+ */
+const ModelSelector = ({ models = [], value, onChange, isLoading }) => {
   const [open, setOpen] = useState(false)
   const chevronRef = useRef(null)
 
-  const selected = CHAT_MODELS.find((model) => model.id === value)
+  const selected = models.find((model) => model.id === value)
+
+  if (isLoading || !models.length) {
+    return (
+      <div className="flex h-9 items-center pr-2 pl-3 text-[14px] text-chat-muted">
+        {isLoading ? 'Loading models…' : 'No models'}
+      </div>
+    )
+  }
 
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -34,7 +45,7 @@ const ModelSelector = ({ value, onChange }) => {
               : 'text-chat-secondary hover:bg-chat-hover hover:text-chat-foreground'
           )}
         >
-          {selected?.label}
+          {selected?.label ?? 'Select model'}
           <AnimatedIcon
             ref={chevronRef}
             icon={ChevronDownIcon}
@@ -49,13 +60,18 @@ const ModelSelector = ({ value, onChange }) => {
         sideOffset={10}
         className="min-w-[168px] rounded-2xl border-chat-border bg-chat-elevated p-1.5 text-chat-foreground shadow-lg"
       >
-        {CHAT_MODELS.map((model) => (
+        {models.map((model) => (
           <DropdownMenuItem
             key={model.id}
             onSelect={() => onChange?.(model.id)}
             className="cursor-pointer justify-between rounded-xl px-3 py-2 text-[14px] text-chat-secondary focus:bg-chat-hover focus:text-chat-foreground"
           >
-            {model.label}
+            <span className="flex min-w-0 flex-col">
+              <span className="truncate">{model.label}</span>
+              <span className="text-[12px] text-chat-muted">
+                {model.provider}
+              </span>
+            </span>
             {model.id === value ? (
               <Check className="size-4 text-chat-foreground" />
             ) : null}

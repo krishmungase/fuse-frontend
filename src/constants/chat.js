@@ -1,8 +1,5 @@
 import { Image } from 'lucide-react'
-import {
-  SearchIcon,
-  SquarePenIcon,
-} from 'lucide-animated'
+import { SearchIcon, SquarePenIcon } from 'lucide-animated'
 
 export const CHAT_MODES = [
   { id: 'chat', label: 'Chat' },
@@ -220,11 +217,3 @@ export const RECENT_CHATS = [
     ],
   },
 ]
-
-export const CHAT_MODELS = [
-  { id: 'fast', label: 'Fast' },
-  { id: 'balanced', label: 'Balanced' },
-  { id: 'pro', label: 'Pro' },
-]
-
-export const DEFAULT_CHAT_MODEL = 'pro'
