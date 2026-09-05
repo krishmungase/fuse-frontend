@@ -8,7 +8,6 @@ const ChatConversation = ({
   sidebarCollapsed,
   onOpenSidebar,
   onExpandSidebar,
-  onSubmit,
 }) => {
   return (
     <main className="relative flex min-w-0 flex-1 flex-col overflow-hidden bg-chat-background">
@@ -31,7 +30,7 @@ const ChatConversation = ({
       </div>
 
       <div className="flex w-full min-w-0 shrink-0 flex-col items-center px-4 pb-4 sm:px-6">
-        <PromptInput onSubmit={onSubmit} />
+        <PromptInput />
         <p className="pt-3 text-[12px] text-chat-muted">
           FuseAI is AI and can make mistakes.
         </p>

@@ -4,7 +4,6 @@ import { usePageTitle } from '@/hooks'
 import { pageTitle } from '@/constants'
 import MainChat from './components/main-chat'
 
-/** The empty / new chat screen at `/chat`. */
 const NewChatPage = () => {
   usePageTitle({ title: pageTitle.CHAT_PAGE })
 
