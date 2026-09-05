@@ -1,15 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 
 import apis from './apis'
+import { chatKeys } from './query-keys'
 
-/**
- * The models the backend will actually accept, plus the id it falls back to.
- * The list is the server's allowlist, so adding a provider needs no frontend
- * change. It rarely moves, hence the long stale time.
- */
 const useChatModels = () => {
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['chat', 'models'],
+    queryKey: chatKeys.models(),
     queryFn: () => apis.models(),
     select: ({ data: response }) => response?.data,
     staleTime: 60 * 60 * 1000,

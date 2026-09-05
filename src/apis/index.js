@@ -4,7 +4,7 @@ import useRegister from './auth/use-register'
 import useSetPassword from './auth/use-set-password'
 import useVerifyEmail from './auth/use-verify-email'
 import useResendVerification from './auth/use-resend-verification'
-import useChatModels from './chat/use-chat-models'
+import { useChatModels } from './chat'
 
 export {
   useLogin,
