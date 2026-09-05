@@ -1,4 +1,5 @@
 export { default as apis } from './apis'
 export { chatKeys } from './query-keys'
+export { default as useChat } from './use-chat'
+export { default as useChats } from './use-chats'
 export { default as useChatModels } from './use-chat-models'
-export { default as useSendMessage } from './use-send-message'

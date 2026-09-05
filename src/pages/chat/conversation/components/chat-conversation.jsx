@@ -1,14 +1,49 @@
+import { useEffect, useRef } from 'react'
+
 import ChatMessage from './chat-message'
 import ChatTopbar from './chat-topbar'
+import ThinkingIndicator from './thinking-indicator'
 import PromptInput from '../../components/prompt-input'
 
-/** Canvas for a single `/chat/:id` conversation. */
+/** Distance from the bottom that still counts as "following along". */
+const STICK_THRESHOLD_PX = 120
+
 const ChatConversation = ({
-  chat,
+  messages,
+  status,
   sidebarCollapsed,
   onOpenSidebar,
   onExpandSidebar,
 }) => {
+  const scrollRef = useRef(null)
+  const stickToBottomRef = useRef(true)
+
+  // The reply grows downward while it streams, so the view follows it -- but
+  // only while the reader is already at the bottom. Scrolling up to re-read
+  // something must not be yanked back.
+  useEffect(() => {
+    const container = scrollRef.current
+    if (!container || !stickToBottomRef.current) return
+
+    container.scrollTop = container.scrollHeight
+  }, [messages, status])
+
+  const handleScroll = (event) => {
+    const { scrollTop, scrollHeight, clientHeight } = event.currentTarget
+    stickToBottomRef.current =
+      scrollHeight - scrollTop - clientHeight < STICK_THRESHOLD_PX
+  }
+
+  const lastMessage = messages[messages.length - 1]
+
+  // "Submitted" covers the wait before the first token. Streaming with nothing
+  // rendered yet is the same moment from the reader's side.
+  const isThinking =
+    status === 'submitted' ||
+    (status === 'streaming' &&
+      lastMessage?.role === 'assistant' &&
+      !lastMessage.parts?.some((part) => part.type === 'text' && part.text))
+
   return (
     <main className="relative flex min-w-0 flex-1 flex-col overflow-hidden bg-chat-background">
       <ChatTopbar
@@ -17,15 +52,21 @@ const ChatConversation = ({
         onExpandSidebar={onExpandSidebar}
       />
 
-      <div className="scrollbar-extra-thin min-h-0 flex-1 overflow-y-auto">
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="scrollbar-extra-thin min-h-0 flex-1 overflow-y-auto"
+      >
         <div className="mx-auto flex w-full max-w-[740px] flex-col gap-10 px-4 pt-6 pb-10 sm:px-6">
-          {chat.messages.map((message, index) => (
+          {messages.map((message) => (
             <ChatMessage
-              key={index}
+              key={message.id}
               role={message.role}
-              content={message.content}
+              parts={message.parts}
             />
           ))}
+
+          {isThinking && <ThinkingIndicator />}
         </div>
       </div>
 

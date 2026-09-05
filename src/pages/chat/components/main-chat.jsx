@@ -1,11 +1,7 @@
 import PromptInput from './prompt-input'
 import ChatTopbar from '../conversation/components/chat-topbar'
 
-const MainChat = ({
-  sidebarCollapsed,
-  onOpenSidebar,
-  onExpandSidebar,
-}) => {
+const MainChat = ({ sidebarCollapsed, onOpenSidebar, onExpandSidebar }) => {
   return (
     <main className="relative flex min-w-0 flex-1 flex-col overflow-hidden bg-chat-background">
       <div className="chat-glow pointer-events-none absolute inset-0" />

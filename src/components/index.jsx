@@ -1,3 +1,5 @@
+import MDX from './shared/mdx'
+import FollowUpQuestions from './shared/follow-up-questions'
 import Logo from './shared/logo'
 import Header from './shared/header'
 import Footer from './shared/footer'
@@ -8,6 +10,8 @@ import InputSearch from './shared/input-search'
 import ConfirmDeleteButton from './shared/confirm-delete-button'
 
 export {
+  MDX,
+  FollowUpQuestions,
   Header,
   Footer,
   ConfirmDeleteButton,

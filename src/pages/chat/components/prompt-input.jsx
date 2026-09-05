@@ -1,11 +1,11 @@
-import { MicIcon, PlusIcon } from 'lucide-animated'
+import { PlusIcon } from 'lucide-animated'
 import { HardDriveUpload } from 'lucide-react'
 
-import { useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
 import { IconButton } from '@/components'
-import { useSendMessage } from '@/apis'
 import { useChatModel } from '@/hooks'
+import { useChatSession } from '../context/chat-session'
 import {
   PromptInput as AIPromptInput,
   PromptInputActionAddAttachments,
@@ -13,6 +13,7 @@ import {
   PromptInputActionMenu,
   PromptInputActionMenuContent,
   PromptInputActionMenuItem,
+  PromptInputSpeechButton,
   PromptInputSubmit,
   PromptInputTextarea,
   PromptInputTools,
@@ -37,25 +38,29 @@ const PILL = [
 ].join(' ')
 
 const PromptInput = () => {
+  const { send, stop, status } = useChatSession()
+
   const { models, selectedModel, selectModel, isLoading } = useChatModel()
 
-  const { sendMessage, isLoading: isSending } = useSendMessage({
-    onSuccess: (data) => console.log('[chat]', data?.model, data?.messages),
-  })
+  // While a reply is generating the button becomes Stop, so it has to stay
+  // clickable even though the textarea is empty.
+  const isGenerating = status === 'submitted' || status === 'streaming'
 
   const [hasText, setHasText] = useState(false)
+  const textareaRef = useRef(null)
+
+  const handleTranscription = useCallback(
+    (value) => setHasText(value.trim().length > 0),
+    []
+  )
 
   const handleSubmit = ({ text }) => {
     const prompt = text?.trim()
     if (!prompt) return
 
     setHasText(false)
-    sendMessage({
-      data: { message: prompt, ...(selectedModel && { model: selectedModel }) },
-    })
+    send(prompt, { model: selectedModel })
   }
-
-  const status = isSending ? 'submitted' : undefined
 
   return (
     <AIPromptInput
@@ -93,6 +98,7 @@ const PromptInput = () => {
       </PromptInputActionMenu>
 
       <PromptInputTextarea
+        ref={textareaRef}
         rows={1}
         wrap="off"
         onChange={(event) => setHasText(event.target.value.trim().length > 0)}
@@ -112,17 +118,18 @@ const PromptInput = () => {
           isLoading={isLoading}
         />
 
-        <IconButton
-          icon={MicIcon}
-          animated
-          iconSize={20}
-          label="Use microphone"
-          onClick={(event) => event.stopPropagation()}
+        <PromptInputSpeechButton
+          textareaRef={textareaRef}
+          onTranscriptionChange={handleTranscription}
+          aria-label="Use microphone"
+          tooltip="Use microphone"
+          className="size-10 rounded-full text-chat-secondary hover:bg-chat-hover hover:text-chat-foreground [&_svg]:size-5"
         />
 
         <PromptInputSubmit
           status={status}
-          disabled={!hasText && !status}
+          onStop={stop}
+          disabled={!hasText && !isGenerating}
           className="size-9 rounded-full bg-chat-foreground text-chat-background hover:bg-chat-foreground/90 disabled:bg-chat-hover disabled:text-chat-muted"
         />
       </PromptInputTools>

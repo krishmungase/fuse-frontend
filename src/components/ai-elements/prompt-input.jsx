@@ -42,6 +42,7 @@ import { cn } from '@/lib/utils'
 import {
   CornerDownLeftIcon,
   ImageIcon,
+  MicIcon,
   Monitor,
   PlusIcon,
   SquareIcon,
@@ -1070,6 +1071,104 @@ export const PromptInputSubmit = ({
     >
       {children ?? Icon}
     </InputGroupButton>
+  )
+}
+
+/**
+ * Native Web Speech API dictation button. Appends each final transcript to the
+ * textarea it is pointed at and fires a bubbling `input` event so the form and
+ * any `onChange` listener stay in sync. Disabled where the browser has no
+ * SpeechRecognition (Firefox, most non-Chromium mobile browsers).
+ */
+export const PromptInputSpeechButton = ({
+  className,
+  textareaRef,
+  onTranscriptionChange,
+  ...props
+}) => {
+  const [isListening, setIsListening] = useState(false)
+  const [recognition, setRecognition] = useState(null)
+  const recognitionRef = useRef(null)
+
+  useEffect(() => {
+    if (
+      typeof window === 'undefined' ||
+      !('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)
+    ) {
+      return
+    }
+
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition
+    const speechRecognition = new SpeechRecognition()
+
+    speechRecognition.continuous = true
+    speechRecognition.interimResults = true
+    speechRecognition.lang = 'en-US'
+
+    speechRecognition.onstart = () => setIsListening(true)
+    speechRecognition.onend = () => setIsListening(false)
+
+    speechRecognition.onresult = (event) => {
+      let finalTranscript = ''
+
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const result = event.results[i]
+        if (result.isFinal) {
+          finalTranscript += result[0]?.transcript ?? ''
+        }
+      }
+
+      if (finalTranscript && textareaRef?.current) {
+        const textarea = textareaRef.current
+        const currentValue = textarea.value
+        const newValue =
+          currentValue + (currentValue ? ' ' : '') + finalTranscript
+
+        textarea.value = newValue
+        textarea.dispatchEvent(new Event('input', { bubbles: true }))
+        onTranscriptionChange?.(newValue)
+      }
+    }
+
+    speechRecognition.onerror = (event) => {
+      console.error('Speech recognition error:', event.error)
+      setIsListening(false)
+    }
+
+    recognitionRef.current = speechRecognition
+    setRecognition(speechRecognition)
+
+    return () => {
+      recognitionRef.current?.stop()
+    }
+  }, [textareaRef, onTranscriptionChange])
+
+  const toggleListening = useCallback(() => {
+    if (!recognition) {
+      return
+    }
+
+    if (isListening) {
+      recognition.stop()
+    } else {
+      recognition.start()
+    }
+  }, [recognition, isListening])
+
+  return (
+    <PromptInputButton
+      className={cn(
+        'relative transition-all duration-200',
+        isListening && 'animate-pulse bg-accent text-accent-foreground',
+        className
+      )}
+      disabled={!recognition}
+      onClick={toggleListening}
+      {...props}
+    >
+      <MicIcon className="size-4" />
+    </PromptInputButton>
   )
 }
 

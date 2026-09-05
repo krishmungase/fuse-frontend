@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router'
 
 import { cn } from '@/lib/utils'
-import { RECENT_CHATS } from '@/constants'
+import { useChats } from '@/apis'
 
 /**
  * Scrollable recent conversation list. Takes the flexible space between the
@@ -10,6 +10,7 @@ import { RECENT_CHATS } from '@/constants'
  */
 const RecentChats = ({ onNavigate }) => {
   const { id } = useParams()
+  const { chats, isLoading } = useChats()
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -18,8 +19,12 @@ const RecentChats = ({ onNavigate }) => {
       </p>
 
       <div className="scrollbar-extra-thin min-h-0 flex-1 overflow-y-auto">
+        {!isLoading && !chats.length ? (
+          <p className="px-3 py-2 text-[13px] text-chat-muted">No chats yet</p>
+        ) : null}
+
         <ul className="flex flex-col gap-px pb-2">
-          {RECENT_CHATS.map((chat) => (
+          {chats.map((chat) => (
             <li key={chat.id}>
               <Link
                 to={`/chat/${chat.id}`}
