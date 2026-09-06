@@ -24,6 +24,17 @@ const apis = {
       url: urls.chatById(id),
       method: REQUEST_METHOD.GET,
     }),
+  rename: ({ id, data }) =>
+    apiRequest({
+      data,
+      url: urls.chatById(id),
+      method: REQUEST_METHOD.PATCH,
+    }),
+  remove: ({ id }) =>
+    apiRequest({
+      url: urls.chatById(id),
+      method: REQUEST_METHOD.DELETE,
+    }),
   send: ({ data }) =>
     apiRequest({
       data,

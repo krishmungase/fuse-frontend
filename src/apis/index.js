@@ -4,7 +4,14 @@ import useRegister from './auth/use-register'
 import useSetPassword from './auth/use-set-password'
 import useVerifyEmail from './auth/use-verify-email'
 import useResendVerification from './auth/use-resend-verification'
-import { chatKeys, useChat, useChats, useChatModels } from './chat'
+import {
+  chatKeys,
+  useChat,
+  useChats,
+  useChatModels,
+  useRenameChat,
+  useDeleteChat,
+} from './chat'
 
 export {
   chatKeys,
@@ -17,4 +24,6 @@ export {
   useChat,
   useChats,
   useChatModels,
+  useRenameChat,
+  useDeleteChat,
 }
