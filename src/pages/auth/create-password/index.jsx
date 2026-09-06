@@ -8,12 +8,6 @@ import AuthSplit from '../components/auth-split'
 import AuthHeader from '../components/auth-header'
 import CreatePasswordForm from './components/create-password-form'
 
-/**
- * Final registration step. The setup token arrives in router state from the
- * verify-email page rather than the URL, so it never lands in browser history
- * or a Referer header. A direct visit (or a refresh) has no token and is sent
- * back to sign-in.
- */
 const CreatePasswordPage = () => {
   usePageTitle({ title: pageTitle.CREATE_PASSWORD_PAGE })
 

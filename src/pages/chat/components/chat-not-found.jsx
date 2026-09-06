@@ -3,7 +3,6 @@ import { Link } from 'react-router'
 import { NEW_CHAT_PATH } from '@/constants'
 import ChatTopbar from '../conversation/components/chat-topbar'
 
-/** Shown when `/chat/:id` points at a conversation that does not exist. */
 const ChatNotFound = ({
   id,
   sidebarCollapsed,

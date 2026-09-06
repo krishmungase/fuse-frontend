@@ -2,7 +2,6 @@ import { PanelLeftCloseIcon } from 'lucide-animated'
 
 import { IconButton } from '@/components'
 
-/** Sidebar header: product logo and the collapse control. */
 const SidebarBrand = ({ onCollapse }) => {
   return (
     <div className="flex h-12 items-center justify-between gap-2 pr-1 pl-2">

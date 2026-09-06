@@ -3,12 +3,6 @@ import { forwardRef, useRef } from 'react'
 import { cn } from '@/lib/utils'
 import AnimatedIcon from './animated-icon'
 
-/**
- * Circular, icon-only button used across the chat shell.
- *
- * Hovering the button (not just the glyph) drives the icon animation, so the
- * whole hit area feels alive rather than only the icon's own bounding box.
- */
 const IconButton = forwardRef(
   (
     {

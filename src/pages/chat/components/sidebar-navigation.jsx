@@ -3,7 +3,6 @@ import { useLocation } from 'react-router'
 import { CHAT_NAVIGATION } from '@/constants'
 import NavigationItem from './navigation-item'
 
-/** Primary sidebar navigation group. */
 const SidebarNavigation = ({ activeId, onSelect, onNavigate }) => {
   const { pathname } = useLocation()
 

@@ -21,8 +21,6 @@ const formSchema = z.object({
 const LoginForm = () => {
   const navigate = useNavigate()
 
-  // `replace` drops sign-in from history, so Back from the chat doesn't
-  // return a signed-in user to the login form.
   const { isLoading, login } = useLogin({
     onSuccess: () => navigate('/chat', { replace: true }),
   })

@@ -2,18 +2,6 @@ import { forwardRef, useImperativeHandle, useRef } from 'react'
 
 import { cn } from '@/lib/utils'
 
-/**
- * Renders a Lucide icon behind a single interface.
- *
- * `lucide-animated` icons are motion driven and expose an imperative
- * `startAnimation` / `stopAnimation` handle, while plain `lucide-react` icons
- * are static. Both are wrapped here so a parent (a nav row, an icon button)
- * can drive the animation from its own hover without caring which kind of
- * icon it was handed.
- *
- * Stroke width is normalised through CSS: the animated icons hard-code a
- * `stroke-width` presentation attribute, and a CSS rule beats an attribute.
- */
 const AnimatedIcon = forwardRef(
   (
     {
@@ -26,7 +14,6 @@ const AnimatedIcon = forwardRef(
     },
     ref
   ) => {
-    // Aliased to a capitalised local so it can be used as a JSX element.
     const Icon = icon
     const iconRef = useRef(null)
 

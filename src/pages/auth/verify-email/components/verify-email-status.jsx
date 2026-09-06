@@ -4,10 +4,6 @@ import { Spinner } from '@/components/ui/spinner'
 
 import ResendVerificationForm from './resend-verification-form'
 
-/**
- * Either the in-flight spinner or the recovery path. There is no success state:
- * a verified token redirects straight to create-password.
- */
 const VerifyEmailStatus = ({ errorMessage }) => {
   if (!errorMessage) {
     return (

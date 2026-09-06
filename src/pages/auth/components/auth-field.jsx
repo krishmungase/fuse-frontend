@@ -10,10 +10,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 
-/**
- * A labelled auth input shaped like the chat prompt pill. Password fields get
- * a reveal toggle that matches the circular icon buttons used elsewhere.
- */
 const AuthField = ({
   control,
   name,

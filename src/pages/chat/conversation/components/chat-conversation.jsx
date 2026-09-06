@@ -17,9 +17,6 @@ const ChatConversation = ({
   const scrollRef = useRef(null)
   const stickToBottomRef = useRef(true)
 
-  // The reply grows downward while it streams, so the view follows it -- but
-  // only while the reader is already at the bottom. Scrolling up to re-read
-  // something must not be yanked back.
   useEffect(() => {
     const container = scrollRef.current
     if (!container || !stickToBottomRef.current) return
@@ -35,8 +32,6 @@ const ChatConversation = ({
 
   const lastMessage = messages[messages.length - 1]
 
-  // "Submitted" covers the wait before the first token. Streaming with nothing
-  // rendered yet is the same moment from the reader's side.
   const isThinking =
     status === 'submitted' ||
     (status === 'streaming' &&

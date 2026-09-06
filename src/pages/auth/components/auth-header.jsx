@@ -1,4 +1,3 @@
-/** Page title and supporting line above an auth form. */
 const AuthHeader = ({ title, subtitle }) => {
   return (
     <div className="flex flex-col items-center pt-8 pb-8 text-center">

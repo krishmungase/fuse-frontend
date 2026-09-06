@@ -4,11 +4,6 @@ import { Link } from 'react-router'
 import { cn } from '@/lib/utils'
 import { AnimatedIcon } from '@/components'
 
-/**
- * A single sidebar row: icon on the left, label beside it, pill hover.
- * Hovering the whole row drives the animated icon. Rows with a `to` render as
- * links so navigation stays client-side and the URL is shareable.
- */
 const NavigationItem = ({
   icon,
   animated = false,

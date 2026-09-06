@@ -33,8 +33,6 @@ const useChatStream = ({ id, initialMessages }) => {
     id,
     transport,
     messages: initialMessages,
-    // The title is derived server-side from the first message, so the sidebar
-    // only learns a new chat's name once the turn lands.
     onFinish: () =>
       queryClient.invalidateQueries({ queryKey: chatKeys.lists() }),
   })

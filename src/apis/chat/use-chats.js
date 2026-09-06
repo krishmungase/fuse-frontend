@@ -8,8 +8,6 @@ const useChats = ({ q = '' } = {}) => {
     queryKey: chatKeys.list(q),
     queryFn: () => apis.list({ q }),
     select: ({ data: response }) => response?.data?.chats ?? [],
-    // Each keystroke is a new cache key. Holding the previous results keeps the
-    // list from blanking out between them.
     placeholderData: keepPreviousData,
     retry: false,
   })

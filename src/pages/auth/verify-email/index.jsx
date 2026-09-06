@@ -9,12 +9,6 @@ import AuthSplit from '../components/auth-split'
 import AuthHeader from '../components/auth-header'
 import VerifyEmailStatus from './components/verify-email-status'
 
-/**
- * Landing page for the link in the verification email. Redeems the token once,
- * then hands the returned setup token to the create-password page through
- * router state -- deliberately not the URL, so it stays out of browser history
- * and any Referer header.
- */
 const VerifyEmailPage = () => {
   usePageTitle({ title: pageTitle.VERIFY_EMAIL_PAGE })
 
@@ -41,9 +35,6 @@ const VerifyEmailPage = () => {
       ),
   })
 
-  // The token is single-use, so this must fire exactly once -- StrictMode
-  // remounts effects in development and a second call would burn a token the
-  // first call already spent.
   const hasRequested = useRef(false)
 
   useEffect(() => {

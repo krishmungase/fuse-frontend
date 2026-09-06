@@ -1,10 +1,6 @@
 import { useAuth } from '@/hooks'
 import { Navigate, Outlet } from 'react-router'
 
-/**
- * Auth shell: the same fixed dark surface and subtle bloom as the chat canvas.
- * Page content decides its own arrangement inside the centred container.
- */
 const AuthLayout = () => {
   const { user } = useAuth()
 

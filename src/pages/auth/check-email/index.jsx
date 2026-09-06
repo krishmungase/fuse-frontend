@@ -9,11 +9,6 @@ import AuthHeader from '../components/auth-header'
 import AuthSwitchLink from '../components/auth-switch-link'
 import CheckEmailNotice from './components/check-email-notice'
 
-/**
- * Confirmation step between registering and opening the emailed link. The
- * address arrives in router state, matching how create-password receives its
- * setup token; a direct visit has nothing to confirm and goes back to sign-up.
- */
 const CheckEmailPage = () => {
   usePageTitle({ title: pageTitle.CHECK_EMAIL_PAGE })
 

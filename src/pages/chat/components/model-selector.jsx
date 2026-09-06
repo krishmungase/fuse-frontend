@@ -11,11 +11,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-/**
- * Compact model picker that lives on the right of the prompt input. The
- * options come from the backend allowlist, so this component never decides
- * which models exist.
- */
 const ModelSelector = ({ models = [], value, onChange, isLoading }) => {
   const [open, setOpen] = useState(false)
   const chevronRef = useRef(null)

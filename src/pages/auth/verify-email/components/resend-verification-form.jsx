@@ -15,7 +15,6 @@ const formSchema = z.object({
     .email({ message: 'Invalid email address' }),
 })
 
-/** Asks for the address again and requests a fresh verification link. */
 const ResendVerificationForm = ({ defaultEmail = '' }) => {
   const { isLoading, resendVerification } = useResendVerification()
 

@@ -2,11 +2,6 @@ import { MailCheck } from 'lucide-react'
 
 import { useResendVerification } from '@/apis'
 
-/**
- * Restates where the link went and offers a resend. The spam prompt is
- * deliberate -- a first message from a new sender lands there often enough
- * that people give up before looking.
- */
 const CheckEmailNotice = ({ email }) => {
   const { isLoading, resendVerification } = useResendVerification()
 

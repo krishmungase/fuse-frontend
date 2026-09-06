@@ -1,11 +1,3 @@
-/**
- * Auth arrangement: brand illustration on the left from `lg` up, form column on
- * the right. Below `lg` — or when no illustration is supplied — the form
- * centres on its own.
- *
- * An illustration must be a PNG with a real alpha channel; anything exported on
- * a white matte reads as a white rectangle against the dark surface.
- */
 const AuthSplit = ({ illustration, children }) => {
   return (
     <div className="flex items-center justify-center gap-10 xl:gap-16">
