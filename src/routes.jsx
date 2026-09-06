@@ -6,6 +6,7 @@ import {
   CheckEmailPage,
   CreatePasswordPage,
   NewChatPage,
+  SearchChatsPage,
   NotFoundPage,
   SignInPage,
   SignUpPage,
@@ -20,6 +21,8 @@ const AppRoutes = () => {
 
         <Route element={<ChatLayout />}>
           <Route path="chat" element={<NewChatPage />} />
+          {/* Declared before the param route so "search" is not read as an id. */}
+          <Route path="chat/search" element={<SearchChatsPage />} />
           <Route path="chat/:id" element={<ChatPage />} />
         </Route>
 

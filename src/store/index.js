@@ -5,9 +5,11 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import { appEnv, NODE_ENV } from '@/constants'
 
 import authSlice from './slices/auth-slice'
+import chatSlice from './slices/chat-slice'
 
 const rootReducer = combineReducers({
   auth: authSlice,
+  chat: chatSlice,
 })
 
 const persistConfig = {
@@ -39,3 +41,4 @@ export const persistor = persistStore(store)
 export default store
 
 export { setAuth, logout, setUser } from './slices/auth-slice'
+export { setSelectedModel } from './slices/chat-slice'

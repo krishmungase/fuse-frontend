@@ -3,7 +3,6 @@ import { LayoutGridIcon, MenuIcon, PanelLeftOpenIcon } from 'lucide-animated'
 import { cn } from '@/lib/utils'
 import { IconButton } from '@/components'
 
-/** Top row of the chat canvas, shared by the empty state and a conversation. */
 const ChatTopbar = ({ sidebarCollapsed, onOpenSidebar, onExpandSidebar }) => {
   return (
     <div className="relative z-10 flex h-14 shrink-0 items-center justify-between px-3">

@@ -1,16 +1,7 @@
 import PromptInput from './prompt-input'
 import ChatTopbar from '../conversation/components/chat-topbar'
 
-/**
- * Chat canvas: subtle bloom, a single control in each top corner, and the
- * vertically centred empty state (heading + prompt pill).
- */
-const MainChat = ({
-  sidebarCollapsed,
-  onOpenSidebar,
-  onExpandSidebar,
-  onSubmit,
-}) => {
+const MainChat = ({ sidebarCollapsed, onOpenSidebar, onExpandSidebar }) => {
   return (
     <main className="relative flex min-w-0 flex-1 flex-col overflow-hidden bg-chat-background">
       <div className="chat-glow pointer-events-none absolute inset-0" />
@@ -26,7 +17,7 @@ const MainChat = ({
           Any new ideas to explore?
         </h1>
 
-        <PromptInput onSubmit={onSubmit} />
+        <PromptInput />
       </div>
     </main>
   )
