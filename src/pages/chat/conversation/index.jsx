@@ -7,14 +7,6 @@ import ChatNotFound from '../components/chat-not-found'
 import ChatTopbar from './components/chat-topbar'
 import ConversationSession from './session'
 
-/**
- * One conversation, keyed by the `:id` route param.
- *
- * This layer only resolves the stored transcript. Arriving from the new chat
- * screen carries the first prompt in route state and nothing is stored yet, so
- * the fetch is skipped entirely. The session below is mounted only once that
- * history is settled, because the streaming hook seeds itself from it once.
- */
 const ChatPage = () => {
   const { id } = useParams()
   const { state } = useLocation()

@@ -1,10 +1,6 @@
 import { MDX } from '@/components'
 import { cn } from '@/lib/utils'
 
-/**
- * One turn of a conversation. User turns sit in a rounded bubble on the right,
- * assistant turns render as markdown across the column.
- */
 const ChatMessage = ({ role, parts = [] }) => {
   const isUser = role === 'user'
 

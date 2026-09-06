@@ -227,13 +227,6 @@ const processContent = (text) => {
   )
 }
 
-/**
- * Closes a code fence that is still being streamed.
- *
- * react-markdown parses whatever it is handed, so a half-arrived ``` block
- * renders as literal backticks until the closing fence shows up. Balancing the
- * count keeps it rendering as a code block the whole way through.
- */
 const closeOpenFence = (text) => {
   const fences = text.match(/^```/gm)
   return fences && fences.length % 2 === 1 ? `${text}\n\`\`\`` : text

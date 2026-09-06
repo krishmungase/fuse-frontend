@@ -3,11 +3,6 @@ import { Link, useParams } from 'react-router'
 import { cn } from '@/lib/utils'
 import { useChats } from '@/apis'
 
-/**
- * Scrollable recent conversation list. Takes the flexible space between the
- * notebooks group and the pinned profile row. The active row is derived from
- * the `/chat/:id` route param, so it survives a refresh.
- */
 const RecentChats = ({ onNavigate }) => {
   const { id } = useParams()
   const { chats, isLoading } = useChats()

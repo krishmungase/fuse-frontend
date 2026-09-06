@@ -2,7 +2,6 @@ import { ArrowRight, CornerDownRight } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
-/** Related questions a reply suggested, offered as one-click prompts. */
 const FollowUpQuestions = ({
   questions,
   onQuestionClick,

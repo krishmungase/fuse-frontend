@@ -5,7 +5,6 @@ import ChatTopbar from './chat-topbar'
 import ThinkingIndicator from './thinking-indicator'
 import PromptInput from '../../components/prompt-input'
 
-/** Distance from the bottom that still counts as "following along". */
 const STICK_THRESHOLD_PX = 120
 
 const ChatConversation = ({

@@ -7,6 +7,7 @@ export const CHAT_MODES = [
 ]
 
 export const NEW_CHAT_PATH = '/chat'
+export const SEARCH_CHATS_PATH = '/chat/search'
 
 export const CHAT_NAVIGATION = [
   {
@@ -21,6 +22,7 @@ export const CHAT_NAVIGATION = [
     label: 'Search chats',
     icon: SearchIcon,
     animated: true,
+    to: SEARCH_CHATS_PATH,
   },
   { id: 'images', label: 'Images', icon: Image },
 ]

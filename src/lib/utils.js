@@ -5,7 +5,6 @@ export function cn(...inputs) {
   return twMerge(clsx(inputs))
 }
 
-/** "Krishna Mungase" -> "KM". Used for avatar fallbacks. */
 export const getInitials = (name = '') =>
   name
     .split(' ')
@@ -15,12 +14,6 @@ export const getInitials = (name = '') =>
     .join('')
     .toUpperCase()
 
-/**
- * Normalises LaTeX delimiters so remark-math sees a single syntax: `$$..$$`,
- * `\[..\]` and `\(..\)` all become `$..$`, and any remaining bare `$` is
- * escaped so prices do not open a math span. Code spans and fences are copied
- * through untouched.
- */
 export function perfectFormatMarkdown(text) {
   const codeRegex = /(```[\s\S]*?```|`[^`]*`)/g
   let lastIndex = 0
@@ -48,7 +41,6 @@ export function perfectFormatMarkdown(text) {
   return result
 }
 
-/** Pulls `<followup>Question?</followup>` tags out of a reply. */
 export const extractFollowUpQuestions = (content = '') => {
   const followupRegex = /<followup>(.*?)<\/followup>/gs
   const questions = []
@@ -63,6 +55,5 @@ export const extractFollowUpQuestions = (content = '') => {
   return questions
 }
 
-/** Strips those same tags so they never render as text. */
 export const removeFollowUpTags = (content = '') =>
   content.replace(/<followup>.*?<\/followup>/gs, '').trim()

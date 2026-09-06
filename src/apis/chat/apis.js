@@ -13,10 +13,11 @@ const apis = {
       url: urls.models,
       method: REQUEST_METHOD.GET,
     }),
-  list: () =>
+  list: ({ q } = {}) =>
     apiRequest({
       url: urls.chat,
       method: REQUEST_METHOD.GET,
+      ...(q && { params: { q } }),
     }),
   detail: ({ id }) =>
     apiRequest({
