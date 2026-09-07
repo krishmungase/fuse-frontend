@@ -24,8 +24,6 @@ const ConversationSession = ({
     [sendMessage]
   )
 
-  // The opening prompt arrives as route state, which survives a refresh, so it
-  // is fired once per mount and then cleared out of history.
   const sentRef = useRef(false)
 
   useEffect(() => {

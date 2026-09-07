@@ -25,8 +25,6 @@ const formSchema = z
 const CreatePasswordForm = ({ setupToken }) => {
   const navigate = useNavigate()
 
-  // No session is issued on success by design, so the user signs in with the
-  // credentials they just chose.
   const { isLoading, setPassword } = useSetPassword({
     onSuccess: () => navigate('/auth/sign-in', { replace: true }),
   })

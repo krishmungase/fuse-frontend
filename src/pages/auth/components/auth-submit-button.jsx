@@ -1,6 +1,5 @@
 import { Spinner } from '@/components/ui/spinner'
 
-/** Primary auth action: a solid light pill, matching the monochrome chat UI. */
 const AuthSubmitButton = ({ isLoading, children }) => {
   return (
     <button

@@ -26,8 +26,6 @@ const UserProfile = ({
       )}
     >
       <Popover open={open} onOpenChange={setOpen}>
-        {/* Identity is the trigger; the settings button stays a separate
-            target so the two actions never fight over the same click. */}
         <PopoverTrigger asChild>
           <button
             type="button"

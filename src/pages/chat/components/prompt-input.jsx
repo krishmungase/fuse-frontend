@@ -42,8 +42,6 @@ const PromptInput = () => {
 
   const { models, selectedModel, selectModel, isLoading } = useChatModel()
 
-  // While a reply is generating the button becomes Stop, so it has to stay
-  // clickable even though the textarea is empty.
   const isGenerating = status === 'submitted' || status === 'streaming'
 
   const [hasText, setHasText] = useState(false)

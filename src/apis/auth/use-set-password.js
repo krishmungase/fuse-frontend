@@ -4,11 +4,6 @@ import { successToast } from '@/lib'
 
 import apis from './apis'
 
-/**
- * Writes the chosen password and activates the account. No session is issued
- * here by design -- the user signs in afterwards with the credentials they
- * just created.
- */
 const useSetPassword = ({ onSuccess } = {}) => {
   const { isPending, mutate } = useMutation({
     mutationFn: ({ data }) => apis.setPassword({ data }),

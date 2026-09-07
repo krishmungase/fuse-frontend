@@ -1,6 +1,5 @@
 import { cn } from '@/lib/utils'
 
-/** Small muted caption that heads a sidebar group ("Notebooks", "Recents"). */
 const SidebarSection = ({ title, className, children }) => {
   return (
     <div className={cn('flex flex-col', className)}>

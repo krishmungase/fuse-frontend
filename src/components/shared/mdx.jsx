@@ -212,7 +212,6 @@ const components = {
 const processContent = (text) => {
   if (!text) return text
 
-  // Fix spaces in URLs for markdown links and images
   return text.replace(
     /(!?\[[^\]]*\])\(([^)]+)\)/g,
     (match, textPart, urlPart) => {

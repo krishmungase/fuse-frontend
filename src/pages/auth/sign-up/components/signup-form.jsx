@@ -17,11 +17,6 @@ const formSchema = z.object({
     .email({ message: 'Invalid email address' }),
 })
 
-/**
- * Collects only a name and email. The account stays pending until the emailed
- * link is opened, so a successful submit moves on to the check-email page
- * rather than signing anyone in.
- */
 const SignUpForm = () => {
   const navigate = useNavigate()
 

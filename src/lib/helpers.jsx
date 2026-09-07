@@ -1,12 +1,6 @@
 import { toast } from 'sonner'
 import { CheckCircle2, Info, TriangleAlert, X, XCircle } from 'lucide-react'
 
-/**
- * Toasts are drawn on the same fixed dark surface as the chat shell, so they
- * use the chat tokens rather than light-mode cards. Colour is carried only by
- * the icon -- the card itself stays neutral, which keeps a toast from
- * shouting over the UI behind it.
- */
 const VARIANTS = {
   success: { icon: CheckCircle2, tone: 'text-emerald-400' },
   error: { icon: XCircle, tone: 'text-red-400' },

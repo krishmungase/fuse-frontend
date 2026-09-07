@@ -1,7 +1,6 @@
 import { cn } from '@/lib/utils'
 import { CHAT_MODES } from '@/constants'
 
-/** Segmented Chat / Spark switch that sits under the wordmark. */
 const ModeSwitch = ({ value, onChange }) => {
   return (
     <div

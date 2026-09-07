@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  /** Allowlisted model id the user picked, or null to follow the server default. */
   selectedModel: null,
 }
 

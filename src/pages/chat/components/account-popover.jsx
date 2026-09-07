@@ -6,7 +6,6 @@ import { useLogout } from '@/apis'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { PopoverContent } from '@/components/ui/popover'
 
-/** One action row. Rows sit in a shared card, split by a hairline divider. */
 const AccountAction = ({ icon, label, onClick }) => (
   <button
     type="button"
@@ -18,11 +17,6 @@ const AccountAction = ({ icon, label, onClick }) => (
   </button>
 )
 
-/**
- * Account menu anchored above the sidebar profile row. Rendered as popover
- * content only -- the Popover root and trigger live in UserProfile, so the
- * panel stays attached to the row it belongs to.
- */
 const AccountPopover = ({ onClose, onOpenProfile }) => {
   const { user } = useAuth()
   const logout = useLogout()

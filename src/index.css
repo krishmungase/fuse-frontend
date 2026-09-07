@@ -129,7 +129,11 @@
   }
 
   ::selection {
-    background-color: var(--color-gray-300);
+    background-color: color-mix(
+      in oklab,
+      var(--color-chat-brand) 35%,
+      transparent
+    );
   }
   input:-webkit-autofill,
   textarea:-webkit-autofill {

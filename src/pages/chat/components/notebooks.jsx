@@ -2,7 +2,6 @@ import { NOTEBOOK_ACTIONS } from '@/constants'
 import NavigationItem from './navigation-item'
 import SidebarSection from './sidebar-section'
 
-/** "Notebooks" group — currently just the create action. */
 const Notebooks = ({ onCreate }) => {
   return (
     <SidebarSection title="Notebooks">

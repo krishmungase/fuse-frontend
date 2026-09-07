@@ -21,8 +21,8 @@ const ConfirmDeleteButton = ({
   text = null,
   isLoading = false,
   className = '',
-  variant = 'icon', // 'icon' | 'button' | 'text'
-  size = 'md', // 'sm' | 'md' | 'lg'
+  variant = 'icon',
+  size = 'md',
   showConfirmation = true,
   onSuccess,
   onError,
