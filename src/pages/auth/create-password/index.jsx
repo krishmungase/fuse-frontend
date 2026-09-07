@@ -27,7 +27,7 @@ const CreatePasswordPage = () => {
   }
 
   return (
-    <AuthSplit illustration="/register.png">
+    <AuthSplit illustration="/password.png">
       <AuthHeader
         title="Create your password"
         subtitle={
