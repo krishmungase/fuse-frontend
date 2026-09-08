@@ -3,10 +3,19 @@ import { useQuery } from '@tanstack/react-query'
 import apis from './apis'
 import { chatKeys } from './query-keys'
 
-const toUIMessage = ({ id, role, content }) => ({
+const toUIMessage = ({ id, role, content, productGroups = [] }) => ({
   id,
   role,
-  parts: [{ type: 'text', text: content ?? '' }],
+  parts: [
+    ...productGroups
+      .filter((group) => group?.products?.length)
+      .map((group, index) => ({
+        type: 'data-products',
+        id: `${id}-products-${index}`,
+        data: group,
+      })),
+    ...(content ? [{ type: 'text', text: content }] : []),
+  ],
 })
 
 const useChat = ({ id, enabled = true }) => {
