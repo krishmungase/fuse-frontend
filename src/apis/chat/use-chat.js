@@ -3,7 +3,13 @@ import { useQuery } from '@tanstack/react-query'
 import apis from './apis'
 import { chatKeys } from './query-keys'
 
-const toUIMessage = ({ id, role, content, productGroups = [] }) => ({
+const toUIMessage = ({
+  id,
+  role,
+  content,
+  productGroups = [],
+  weatherReports = [],
+}) => ({
   id,
   role,
   parts: [
@@ -13,6 +19,13 @@ const toUIMessage = ({ id, role, content, productGroups = [] }) => ({
         type: 'data-products',
         id: `${id}-products-${index}`,
         data: group,
+      })),
+    ...weatherReports
+      .filter((report) => report?.temperature !== undefined)
+      .map((report, index) => ({
+        type: 'data-weather',
+        id: `${id}-weather-${index}`,
+        data: report,
       })),
     ...(content ? [{ type: 'text', text: content }] : []),
   ],
