@@ -1,6 +1,7 @@
 import ChatPage from './chat/conversation'
 import NewChatPage from './chat'
 import SearchChatsPage from './chat/search'
+import PluginsPage from './chat/plugins'
 
 import SignInPage from './auth/sign-in'
 import SignUpPage from './auth/sign-up'
@@ -13,7 +14,7 @@ import NotFoundPage from './not-found'
 import ChatLayout from './chat/layout'
 import AuthLayout from './auth/layout'
 
-export { ChatPage, NewChatPage, SearchChatsPage }
+export { ChatPage, NewChatPage, SearchChatsPage, PluginsPage }
 
 export {
   SignInPage,

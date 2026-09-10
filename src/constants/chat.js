@@ -1,5 +1,7 @@
-import { Image } from 'lucide-react'
+import { Image, Puzzle } from 'lucide-react'
 import { SearchIcon, SquarePenIcon } from 'lucide-animated'
+
+import { PLUGINS_PATH } from './plugins'
 
 export const CHAT_MODES = [
   { id: 'chat', label: 'Chat' },
@@ -25,4 +27,5 @@ export const CHAT_NAVIGATION = [
     to: SEARCH_CHATS_PATH,
   },
   { id: 'images', label: 'Images', icon: Image },
+  { id: 'plugins', label: 'Plugins', icon: Puzzle, to: PLUGINS_PATH },
 ]

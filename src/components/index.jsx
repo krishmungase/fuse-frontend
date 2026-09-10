@@ -9,6 +9,7 @@ import AnimatedIcon from './shared/animated-icon'
 import InputSearch from './shared/input-search'
 import ConfirmDeleteButton from './shared/confirm-delete-button'
 import ProductCarousel from './shared/product-carousel'
+import WeatherCard from './shared/weather-card'
 
 export {
   MDX,
@@ -22,4 +23,5 @@ export {
   AnimatedIcon,
   IconButton,
   ProductCarousel,
+  WeatherCard,
 }
