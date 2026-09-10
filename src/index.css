@@ -181,10 +181,10 @@
  * the app-wide shadcn tokens used by the auth pages.
  * ---------------------------------------------------------------------- */
 @theme {
-  --color-chat-background: #0b0b0b;
-  --color-chat-sidebar: #202020;
-  --color-chat-surface: #1f1f1f;
-  --color-chat-elevated: #282828;
+  --color-chat-background: #000000;
+  --color-chat-sidebar: #0a0a0a;
+  --color-chat-surface: #121212;
+  --color-chat-elevated: #1c1c1c;
   --color-chat-foreground: #e8e8e8;
   --color-chat-secondary: #a0a0a0;
   --color-chat-muted: #777777;

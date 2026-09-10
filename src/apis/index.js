@@ -12,6 +12,12 @@ import {
   useRenameChat,
   useDeleteChat,
 } from './chat'
+import {
+  connectionKeys,
+  useConnections,
+  useConnectApp,
+  useDisconnectApp,
+} from './connections'
 
 export {
   chatKeys,
@@ -26,4 +32,8 @@ export {
   useChatModels,
   useRenameChat,
   useDeleteChat,
+  connectionKeys,
+  useConnections,
+  useConnectApp,
+  useDisconnectApp,
 }
