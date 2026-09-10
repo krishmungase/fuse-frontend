@@ -209,21 +209,51 @@ const components = {
   ),
 }
 
+const URL_UNSAFE_CHARS = { ' ': '%20', '|': '%7C', '(': '%28', ')': '%29' }
+
+const encodeUrl = (url) =>
+  url.replace(/[ |()]/g, (character) => URL_UNSAFE_CHARS[character])
+
+const readLinkTarget = (text, start) => {
+  let depth = 1
+
+  for (let index = start; index < text.length; index += 1) {
+    const character = text[index]
+
+    if (character === '(') depth += 1
+    if (character === ')') depth -= 1
+    if (depth === 0) return index
+    if (character === '\n') return -1
+  }
+
+  return -1
+}
+
 const processContent = (text) => {
   if (!text) return text
 
-  return text.replace(
-    /(!?\[[^\]]*\])\(([^)]+)\)/g,
-    (match, textPart, urlPart) => {
-      const parts = urlPart.match(/^(.*?)(?:\s+["'](.*?)["'])?$/)
-      if (parts) {
-        const url = parts[1].replace(/ /g, '%20')
-        const title = parts[2] ? ` "${parts[2]}"` : ''
-        return `${textPart}(${url}${title})`
-      }
-      return match
-    }
-  )
+  const linkStart = /(!?\[[^\]]*\])\(/g
+  let result = ''
+  let cursor = 0
+  let match
+
+  while ((match = linkStart.exec(text)) !== null) {
+    const targetStart = match.index + match[0].length
+    const targetEnd = readLinkTarget(text, targetStart)
+
+    if (targetEnd === -1) continue
+
+    const target = text.slice(targetStart, targetEnd)
+    const titled = target.match(/^(.*?)(?:\s+["'](.*?)["'])?$/)
+    const url = encodeUrl((titled ? titled[1] : target).trim())
+    const title = titled?.[2] ? ` "${titled[2]}"` : ''
+
+    result += text.slice(cursor, match.index) + `${match[1]}(${url}${title})`
+    cursor = targetEnd + 1
+    linkStart.lastIndex = cursor
+  }
+
+  return result + text.slice(cursor)
 }
 
 const closeOpenFence = (text) => {

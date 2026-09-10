@@ -8,6 +8,7 @@ import ThemeToggle from './shared/theme-toggle'
 import AnimatedIcon from './shared/animated-icon'
 import InputSearch from './shared/input-search'
 import ConfirmDeleteButton from './shared/confirm-delete-button'
+import ProductCarousel from './shared/product-carousel'
 
 export {
   MDX,
@@ -20,4 +21,5 @@ export {
   ThemeToggle,
   AnimatedIcon,
   IconButton,
+  ProductCarousel,
 }
